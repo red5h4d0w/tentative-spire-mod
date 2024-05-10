@@ -39,9 +39,8 @@ public class PikachuMeter {
     private static int counterPosition = 0;
 
     public float x = 128f * Settings.xScale;
+
     public float y = Settings.HEIGHT/2;
-    
-    
 
     public Texture sliderBar = ImageMaster.OPTION_SLIDER_BG;
 
@@ -93,8 +92,6 @@ public class PikachuMeter {
             }
 
             TipHelper.queuePowerTips(InputHelper.mX + 60.0f*Settings.xScale, InputHelper.mY, powerTips);
-            // FontHelper.renderFontLeftTopAligned(sb, FontHelper.tipHeaderFont, TITLE, x + TEXT_OFFSET_X, y + HEADER_OFFSET_Y, Settings.GOLD_COLOR);
-            // FontHelper.renderSmartText(sb, FontHelper.tipBodyFont, DESCRIPTION, x + TEXT_OFFSET_X, y + BODY_OFFSET_Y, BODY_TEXT_WIDTH, TIP_DESC_LINE_SPACING, BASE_COLOR);
         } 
     }
     public void setCounterPosition(int newCounterPosition) {
