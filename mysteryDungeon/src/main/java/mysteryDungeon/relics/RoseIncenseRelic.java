@@ -1,15 +1,19 @@
 package mysteryDungeon.relics;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 
 import mysteryDungeon.MysteryDungeon;
 import mysteryDungeon.abstracts.PokemonRelic;
+import mysteryDungeon.pokemons.Bulbasaur;
 import mysteryDungeon.util.TextureLoader;
 
 import static mysteryDungeon.MysteryDungeon.makeRelicOutlinePath;
 import static mysteryDungeon.MysteryDungeon.makeRelicPath;
+
+import java.util.HashSet;
 
 public class RoseIncenseRelic extends PokemonRelic {
     public static final String ID = MysteryDungeon.makeID(RoseIncenseRelic.class);
@@ -22,6 +26,11 @@ public class RoseIncenseRelic extends PokemonRelic {
 
     public RoseIncenseRelic() {
         super(ID, IMG, OUTLINE, RelicTier.SHOP, LandingSound.CLINK);
+        cardColors = new HashSet<CardColor>() {
+            {
+                add(Bulbasaur.CARD_COLOR);
+            }
+        };
     }
 
     @Override
