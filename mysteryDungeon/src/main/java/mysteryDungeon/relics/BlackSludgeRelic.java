@@ -14,17 +14,24 @@ import java.util.HashSet;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerToRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.AbstractPower.PowerType;
+import com.megacrit.cardcrawl.powers.PoisonPower;
 
-public class GrassGemRelic extends PokemonRelic {
+public class BlackSludgeRelic extends PokemonRelic {
 
     // ID, images, text.
-    public static final String ID = MysteryDungeon.makeID(GrassGemRelic.class);
+    public static final String ID = MysteryDungeon.makeID(BlackSludgeRelic.class);
 
     private static final RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public static final String NAME = relicStrings.NAME;
@@ -32,7 +39,7 @@ public class GrassGemRelic extends PokemonRelic {
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("grass-gem.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("grass-gem.png"));
 
-    public GrassGemRelic() {
+    public BlackSludgeRelic() {
         super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.CLINK);
 
         cardColors = new HashSet<CardColor>() {
@@ -44,23 +51,18 @@ public class GrassGemRelic extends PokemonRelic {
 
     }
 
-    @Override
-    public void atBattleStart() {
-        beginPulse();
-        pulse = true;
-        usedUp = false;
-    }
-
-    @Override
-    public void onPlayCard(AbstractCard c, AbstractMonster m) {
-        super.onPlayCard(c, m);
-        if(c.type == CardType.ATTACK && !usedUp) {
-            flash();
-            pulse = false;
-            usedUp = true;
-            AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(c.costForTurn));
-        }
-    }
+    public void onMonsterDeath(AbstractMonster m) {
+    if (m.hasPower(m.powers.stream().filter(p->p.type == PowerType.DEBUFF).count())) {
+      int amount = (m.getPower(m.powers.stream().filter(p->p.type == PowerType.DEBUFF).count())).amount;
+      if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+        flash();
+        addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)m, this));
+        addToBot((AbstractGameAction)new ApplyPowerToRandomEnemyAction((AbstractCreature)AbstractDungeon.player, (AbstractPower)new PoisonPower(null, (AbstractCreature)AbstractDungeon.player, amount), amount, false, AbstractGameAction.AttackEffect.POISON));
+      } else {
+        logger.info("no target for the specimen");
+      } 
+    } 
+  }
 
     // Description
     @Override
