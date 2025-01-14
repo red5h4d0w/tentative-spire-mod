@@ -3,7 +3,6 @@ package mysteryDungeon.relics;
 import mysteryDungeon.MysteryDungeon;
 import mysteryDungeon.abstracts.PokemonRelic;
 import mysteryDungeon.pokemons.Bulbasaur;
-import mysteryDungeon.pokemons.Chikorita;
 import mysteryDungeon.util.TextureLoader;
 
 import static mysteryDungeon.MysteryDungeon.makeRelicOutlinePath;
@@ -33,8 +32,8 @@ public class BlackSludgeRelic extends PokemonRelic {
     private static final RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public static final String NAME = relicStrings.NAME;
     public static final String[] DESCRIPTIONS = relicStrings.DESCRIPTIONS;
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("grass-gem.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("grass-gem.png"));
+    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("black-sludge.png"));
+    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("black-sludge.png"));
 
     public BlackSludgeRelic() {
         super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.CLINK);
@@ -42,7 +41,6 @@ public class BlackSludgeRelic extends PokemonRelic {
         cardColors = new HashSet<CardColor>() {
             {
                 add(Bulbasaur.CARD_COLOR);
-                add(Chikorita.CARD_COLOR);
             }
         };
 
