@@ -90,6 +90,13 @@
             "턴 시작시 [E] 를 얻습니다. NL 턴 종료시 적 전체에게 #y분화 를 발동합니다."
         ]
     },
+    "mysteryDungeon:GrassGemRelic": {
+        "NAME": "Grass Gem",
+        "FLAVOR": "This gem is imbued with the essence of plants and will boost the power of a Grass-type move—but only once",
+        "DESCRIPTIONS": [
+            "The first attack each combat refunds the energy spent."
+        ]
+    },
     "mysteryDungeon:GrassySeedRelic": {
         "NAME": "그래스시드",
         "FLAVOR": "그래스필드가 활성화 되어 있을 때 이 도구를 지니게 한 포켓몬이 있으면 그 포켓몬의 방어가 한 단계 올라갑니다.",
@@ -186,6 +193,13 @@
         "FLAVOR": "이게 뭐지?",
         "DESCRIPTIONS": [
             "내 턴 시작시 #y예지 #b1."
+        ]
+    },
+    "mysteryDungeon:RoseIncenseRelic": {
+        "NAME": "Rose incense",
+        "FLAVOR": "This incense has a curious aroma that boosts the power of the holder's Grass-type moves.",
+        "DESCRIPTIONS": [
+            "Whenever you #yHeal, #yHeal #b1 more #yHP."
         ]
     },
     "mysteryDungeon:SplashPlateRelic": {
